@@ -1,0 +1,23 @@
+{
+  "name": "aem-user-yaml-export",
+  "version": "1.0.0",
+  "description": "This tool is able to access an AEM 6.x to read the list of users and export them as YAML file to import them again as Access Control Tool for Adobe Experience Manager (https://github.com/Netcentric/accesscontroltool)",
+  "main": "aem-user-yaml-export.js",
+  "dependencies": {
+    "request": "^2.71.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbrinkmann/aem-user-yaml-export.git"
+  },
+  "author": "Sascha Brinkmann (https://github.com/sbrinkmann)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sbrinkmann/aem-user-yaml-export/issues"
+  },
+  "homepage": "https://github.com/sbrinkmann/aem-user-yaml-export#readme"
+}
