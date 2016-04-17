@@ -24,7 +24,7 @@ It is possible to add the following options while calling to define the AEM inst
   -h, --hostname string
   --port number
   -u, --username string
-  -p, --password string
+  -p, --password string`
   -f, --filename string
   -i, --ignoreUsers string[]
   --ignoreUnprivileged
