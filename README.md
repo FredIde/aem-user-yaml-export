@@ -17,7 +17,7 @@ npm install
 
 
 ## Run
-To run the script just call ```./aem-user-yaml-export.js``
+To run the script just call ``./aem-user-yaml-export.js``
 
 It is possible to add the following options while calling to define the AEM instance you want to connect to and where the result should be stored.
 ```
