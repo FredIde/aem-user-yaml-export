@@ -4,6 +4,8 @@
   "description": "This tool is able to access an AEM 6.x to read the list of users and export them as YAML file to import them again as Access Control Tool for Adobe Experience Manager (https://github.com/Netcentric/accesscontroltool)",
   "main": "aem-user-yaml-export.js",
   "dependencies": {
+    "command-line-args": "^2.1.6",
+    "log4js": "^0.6.35",
     "request": "^2.71.0"
   },
   "devDependencies": {},
