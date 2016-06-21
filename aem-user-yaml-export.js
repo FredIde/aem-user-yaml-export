@@ -5,6 +5,8 @@ var request = require('request');
 var log4js = require('log4js');
 var log = log4js.getLogger();
 var fs = require('fs');
+var uuid = require('uuid');
+var YAML = require('yamljs');
 
 var ignorePrincipalsDefaultList = ['admin', 'anonymous', 'author'];
 
@@ -39,8 +41,10 @@ request(connectionOptions, function(error, response, users) {
 	}
 	else
 	{
+		var outputObject = {};
+		outputObject.user_config = [];
+
 		var wstream = fs.createWriteStream(options.filename);
-		wstream.write("user_config:\n\n");
 		var userList = users.authorizables;
 		log.debug("Will process " + userList.length + " users.");
 		userList.forEach(function(user, index) {
@@ -64,6 +68,16 @@ request(connectionOptions, function(error, response, users) {
 			{
 				log.debug(progress + "%: Add user '" + user.principal + "'");
 
+				var userOutput = {};
+				var userOutputDetails = {};
+				userOutput[user.principal] = [userOutputDetails];
+				outputObject.user_config.push(userOutput);
+
+				var userPath = '/home/users/' + user.principal.substring(0,1);
+				userOutputDetails['path'] = userPath;
+
+				userOutputDetails['password'] = uuid.v4();
+
 				var userName = "";
 				if (user.givenName)
 				{
@@ -74,18 +88,18 @@ request(connectionOptions, function(error, response, users) {
 					userName += user.familyName;
 				}
 
-				wstream.write("\t" + user.principal + ":\n");
 				if (userName.length > 0)
 				{
-					wstream.write("\t\t- name: " + userName + "\n");
+					userOutputDetails['name'] = userName;
 				}
 				if(userMembership.length > 0)
 				{
-					wstream.write("\t\t- isMemberOf: " + userMembership.join(",") + "\n");
+					userOutputDetails['isMemberOf'] = userMembership.join(',');
 				}
-				wstream.write("\n");
 			}
+
 		});
+		wstream.write('  - ' + YAML.stringify(outputObject));
 		wstream.end();
 	}
 });
